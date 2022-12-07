@@ -7,7 +7,7 @@ import RecipesController from "./recipes/recipes-controller.js";
 import MoviesController from "./movies/movies-controller.js";
 import LikesController from "./likes/likes-controller.js";
 import SessionController from "./session-controller.js";
-import ReviewsController from "./reviews/reviews-controller.js";
+import CommentsController from "./comments/comments-controller.js";
 import mongoose from "mongoose";
 import FollowsController from "./follows/follows-controller.js";
 
@@ -37,11 +37,10 @@ app.use(session({
 app.use(express.json())
 UsersController(app)
 RecipesController(app)
-
+CommentsController(app)
 
 MoviesController(app)
 LikesController(app)
 SessionController(app)
-ReviewsController(app)
 FollowsController(app)
 app.listen(4000)
