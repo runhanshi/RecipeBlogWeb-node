@@ -15,6 +15,7 @@ const RecipesController = (app) => {
     }
 
     const deleteRecipe = async (req, res) => {
+        console.log("controller delete recipe")
         const rid = req.params['intRecipeID']
         const status = await recipesDao.deleteRecipe(rid)
         res.send(status)
