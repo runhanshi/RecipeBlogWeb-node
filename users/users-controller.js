@@ -73,6 +73,18 @@ const UsersController = (app) => {
         res.sendStatus(404)
     }
 
+    const getMyRecipes = async (req, res) => {
+        if (req.session['currentUser']) {
+            const { _id } = req.session['currentUser'];
+            const recipes = await userDao.findRecipesByUserId(_id);
+            res.json(recipes)
+        } else {
+            res.sendStatus(403)
+        }
+
+    }
+
+    app.get('/myRecipes', getMyRecipes)
     app.get('/users', findAllUsers)
     app.get('/users/:uid', findUserById)
     app.post('/users', createUser)

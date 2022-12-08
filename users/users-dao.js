@@ -1,10 +1,18 @@
 import usersModel from "./users-model.js";
+import recipesModel from "../recipes/recipes-model.js";
 
 export const createUser = async (user) =>
     await usersModel.create(user)
 
+export const findRecipesByUserId = async (id) =>
+    await recipesModel.find({
+        chefID: id
+    })
+
 export const findUserByUsername = async (username) =>
-    await usersModel.findOne({username})
+    await usersModel.findOne({
+        username
+    })
 
 export const findUserByCredentials = async (username, password) =>
     await usersModel.findOne({username, password})
