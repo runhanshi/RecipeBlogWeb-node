@@ -28,6 +28,7 @@ const RecommendationsController = (app) => {
     const findMostRecentTenRecommendedRecipes = async (req, res) => {
         console.log("findMostRecentTenRecommendedRecipes controller")
         const recommendations = await recommendationDao.findMostRecentTenRecommendedRecipes()
+        console.log(recommendations)
         res.json(recommendations)
     }
 

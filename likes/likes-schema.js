@@ -5,4 +5,5 @@ const likesSchema = mongoose.Schema({
     recipe: {type: mongoose.Schema.Types.ObjectId, ref: 'recipes'},
     time: Date,
 }, {collection: 'likes'})
+mongoose.model("likes", likesSchema);
 export default likesSchema
