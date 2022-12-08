@@ -1,4 +1,5 @@
 import * as likesDao from "./likes-dao.js";
+import {findMostRecentTenLikedRecipes} from "./likes-dao.js";
 
 const LikesController = (app) => {
 
@@ -20,8 +21,8 @@ const LikesController = (app) => {
 
     const findMostRecentTenLikedRecipes = async (req, res) => {
         console.log("findMostRecentTenLikedRecipes controller")
-        const likes = await likesDao.findAllLikes()
-        res.json(likes)
+        const recipes = await likesDao.findMostRecentTenLikedRecipes()
+        res.json(recipes)
     }
 
     const findRecipesLikedByCustomer = async (req, res) => {

@@ -19,8 +19,18 @@ export const findCustomersWhoLikeRecipe = async(rid) => {
 }
 
 export const findMostRecentTenLikedRecipes = async() => {
-    return await likesModel.find(
+    return await likesModel.aggregate([
+        { "$group": {
+            "_id": "$recipe"
+        }},
+        { "$limit": 10 },
+        {"$sort": {"time": -1}},
+        {"$lookup": {
+                "from": "recipes",
+                "localField": "_id",
+                "foreignField": "_id",
+                "as" : "recipe",
+                "pipeline": [ {"$project": {"name": 1, "picture": 1} } ]
+        }}]
     )
-        .populate('recipes', '_id')
-        .exec()
 }
