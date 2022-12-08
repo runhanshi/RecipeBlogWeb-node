@@ -3,6 +3,7 @@ import * as recipesDao from "./recipes-dao.js";
 const RecipesController = (app) => {
 
     const createRecipe = async (req, res) => {
+        console.log("createRecipe controller")
         const recipe = req.body
         const newRecipe = await recipesDao.createRecipe(recipe)
         res.send(newRecipe)
@@ -24,19 +25,29 @@ const RecipesController = (app) => {
     }
 
     const findRecipeByID = async (req, res) => {
+        console.log("findRecipeByID controller")
         const rid = req.params['intRecipeID']
         const status = await recipesDao.findRecipeByID(rid)
         res.send(status)
     }
 
     const deleteRecipe = async (req, res) => {
+        console.log("deleteRecipe controller")
         const rid = req.params['intRecipeID']
         const status = await recipesDao.deleteRecipe(rid)
         res.send(status)
     }
 
+    const findIntRecipeBySearchKey = async (req, res) => {
+        console.log("findIntRecipeBySearchKey controller")
+        const key = req.query.s
+        const recipes = await recipesDao.findIntRecipeBySearchKey(key)
+        res.send(recipes)
+    }
+
     app.post  ('/create-recipe', createRecipe)
     app.get   ('/recipes/:intRecipeID', findRecipeByID)
+    app.get   ('/recipes-search', findIntRecipeBySearchKey)
     app.put   ('/recipes/add-recommendation', addRecommendation)
     app.put   ('/recipes/remove-recommendation/:intRecipeID', removeRecommendation)
     app.delete('/recipes/:intRecipeID', deleteRecipe)

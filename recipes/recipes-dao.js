@@ -29,6 +29,7 @@ export const findRecipeByID = async (rid) => {
     return recipe
 }
 
-export const findAllRecipes = async () => {
-
+export const findIntRecipeBySearchKey = async (key) => {
+    const recipes = await recipesModel.find({name: { $regex: '.*' + key + '.*' }})
+    return recipes
 }
