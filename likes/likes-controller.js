@@ -15,8 +15,6 @@ const LikesController = (app) => {
         const cid = req.params.cid
         const rid = req.params.rid
         const unlike = await likesDao.customerUnlikesRecipe(cid, rid)
-        unlike.cid = cid
-        unlike.rid = rid
         res.send(unlike)
     }
 

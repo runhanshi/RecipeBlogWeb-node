@@ -4,8 +4,24 @@ export const createRecipe = async (recipe) => {
     return await recipesModel.create(recipe)
 }
 
+export const addRecommendation = async (recommendation) => {
+    console.log(recommendation.rid)
+    return recipesModel.updateOne({_id: recommendation.rid},
+        { $set: recommendation}
+    );
+}
+
+export const removeRecommendation = async (rid) => {
+    return recipesModel.findOneAndUpdate({_id: rid},
+        {
+            recommendedByID: "",
+            recommendedByName: ""
+        }
+    );
+}
+
 export const deleteRecipe = async (rid) => {
-    return await recipesModel.deleteOne({_id: rid})
+    return recipesModel.deleteOne({_id: rid});
 }
 
 export const findRecipeByID = async (rid) => {
