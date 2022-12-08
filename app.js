@@ -4,7 +4,6 @@ import session from 'express-session'
 import UsersController from "./users/users-controller.js";
 import RecipesController from "./recipes/recipes-controller.js";
 
-import MoviesController from "./movies/movies-controller.js";
 import LikesController from "./likes/likes-controller.js";
 import SessionController from "./session-controller.js";
 import CommentsController from "./comments/comments-controller.js";
@@ -39,7 +38,6 @@ UsersController(app)
 RecipesController(app)
 CommentsController(app)
 
-MoviesController(app)
 LikesController(app)
 SessionController(app)
 FollowsController(app)
