@@ -45,9 +45,17 @@ const RecipesController = (app) => {
         res.send(recipes)
     }
 
+    const findTenMostRecentlyCreatedRecipe = async (req, res) => {
+        console.log("findTenMostRecentlyCreatedRecipe controller")
+        const recipes = await recipesDao.findTenMostRecentlyCreatedRecipe()
+        res.send(recipes)
+    }
+
+
     app.post  ('/create-recipe', createRecipe)
     app.get   ('/recipes/:intRecipeID', findRecipeByID)
     app.get   ('/recipes-search', findIntRecipeBySearchKey)
+    app.get   ('/recentCreation', findTenMostRecentlyCreatedRecipe)
     app.put   ('/recipes/add-recommendation', addRecommendation)
     app.put   ('/recipes/remove-recommendation/:intRecipeID', removeRecommendation)
     app.delete('/recipes/:intRecipeID', deleteRecipe)

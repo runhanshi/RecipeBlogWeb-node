@@ -33,3 +33,11 @@ export const findIntRecipeBySearchKey = async (key) => {
     const recipes = await recipesModel.find({name: { $regex: '.*' + key + '.*' }})
     return recipes
 }
+
+export const findTenMostRecentlyCreatedRecipe = async () => {
+    const recipes = await recipesModel.find({}, ["_id", "name", "picture"])
+        .sort({createTime: -1})
+        .limit(10)
+        .exec();
+    return recipes
+}
