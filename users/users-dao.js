@@ -1,5 +1,6 @@
 import usersModel from "./users-model.js";
 import recipesModel from "../recipes/recipes-model.js";
+import recommendationsModel from "../recommendations/recommendations-model.js";
 
 export const createUser = async (user) =>
     await usersModel.create(user)
@@ -13,6 +14,13 @@ export const findUserByUsername = async (username) =>
     await usersModel.findOne({
         username
     })
+
+export const findRecommendsByUserId = async (id) =>
+    await recommendationsModel.find({
+        gourmet: id
+    }). populate('recipe', ['_id', 'name', 'picture']);
+
+
 
 export const findUserByCredentials = async (username, password) =>
     await usersModel.findOne({username, password})
@@ -29,3 +37,4 @@ export const updateUser = async (uid, userUpdates) =>
 
 export const findUserById = (uid) =>
     usersModel.findById(uid, {password: false})
+

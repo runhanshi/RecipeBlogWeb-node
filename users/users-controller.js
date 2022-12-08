@@ -1,5 +1,5 @@
 import * as userDao from './users-dao.js'
-
+import * as recipesDao from '../recipes/recipes-dao.js'
 let currentUser = null
 
 const UsersController = (app) => {
@@ -83,7 +83,18 @@ const UsersController = (app) => {
         }
 
     }
+    const getMyRecommends = async (req, res) => {
+        if (req.session['currentUser']) {
+            const { _id } = req.session['currentUser'];
+            const recommends= (await userDao.findRecommendsByUserId(_id));
+            res.json(recommends)
+        } else {
+            res.sendStatus(403)
+        }
 
+    }
+
+    app.get('/myRecommends', getMyRecommends)
     app.get('/myRecipes', getMyRecipes)
     app.get('/users', findAllUsers)
     app.get('/users/:uid', findUserById)
