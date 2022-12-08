@@ -8,7 +8,8 @@ const recipesSchema = mongoose.Schema({
     category: String,
     picture: String,
     ingredients: [[]],
-    recommendedBy: String,
+    recommendedByID: String,
+    recommendedByName: String,
     createTime: Date,
     instructions: String,
 }, {collection: 'recipes'})

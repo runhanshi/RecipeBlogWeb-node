@@ -1,21 +1,26 @@
 import likesModel from "./likes-model.js";
 
-export const userLikesMovie = async (uid, mid) => {
-    return await likesModel.create({user: uid, movie: mid})
+export const customerLikesRecipe = async (cid, rid, time) => {
+    return await likesModel.create({customer: cid, recipe: rid, time: time})
 }
-export const userUnlikesMovie = async(uid, mid) => {
-    return await likesModel.deleteOne({user: uid, movie: mid})
+export const customerUnlikesRecipe = async(cid, rid) => {
+    return await likesModel.deleteOne({customer: cid, recipe: rid})
 }
-export const findMoviesLikedByUser = async(uid) => {
+export const findRecipesLikedByCustomer = async(cid) => {
     return await likesModel
-        .find({user: uid}, {user: false})
-        .populate('movie', 'title')
+        .find({customer: cid}, {customer: false})
+        .populate('recipe')
         .exec()
 }
-export const findUsersThatLikeMovie = async(mid) => {
-    return await likesModel.find({movie: mid}, {movie: false})
-        .populate('user', 'username')
+export const findCustomersWhoLikeRecipe = async(rid) => {
+    return await likesModel.find({recipe: rid}, {recipe: false})
+        .populate('customer', '_id')
         .exec()
 }
-export const findAllLikes = async () =>
-    await likesModel.find()
+
+export const findMostRecentTenLikedRecipes = async() => {
+    return await likesModel.find(
+    )
+        .populate('recipes', '_id')
+        .exec()
+}

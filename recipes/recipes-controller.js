@@ -8,6 +8,21 @@ const RecipesController = (app) => {
         res.send(newRecipe)
     }
 
+    const addRecommendation = async (req, res) => {
+        console.log("addRecommendation controller")
+        const recommendation = req.body
+        console.log(recommendation)
+        const updatedRecipe = await recipesDao.addRecommendation(recommendation)
+        res.send(updatedRecipe)
+    }
+
+    const removeRecommendation = async (req, res) => {
+        console.log("removeRecommendation controller")
+        const rid = req.params['intRecipeID']
+        const updatedRecipe = await recipesDao.removeRecommendation(rid)
+        res.send(updatedRecipe)
+    }
+
     const findRecipeByID = async (req, res) => {
         const rid = req.params['intRecipeID']
         const status = await recipesDao.findRecipeByID(rid)
@@ -22,6 +37,8 @@ const RecipesController = (app) => {
 
     app.post  ('/create-recipe', createRecipe)
     app.get   ('/recipes/:intRecipeID', findRecipeByID)
+    app.put   ('/recipes/add-recommendation', addRecommendation)
+    app.put   ('/recipes/remove-recommendation/:intRecipeID', removeRecommendation)
     app.delete('/recipes/:intRecipeID', deleteRecipe)
 }
 

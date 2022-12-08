@@ -4,12 +4,12 @@ import session from 'express-session'
 import UsersController from "./users/users-controller.js";
 import RecipesController from "./recipes/recipes-controller.js";
 
-import MoviesController from "./movies/movies-controller.js";
 import LikesController from "./likes/likes-controller.js";
 import SessionController from "./session-controller.js";
 import CommentsController from "./comments/comments-controller.js";
 import mongoose from "mongoose";
 import FollowsController from "./follows/follows-controller.js";
+import RecommendationsController from "./recommendations/recommendations-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -38,8 +38,7 @@ app.use(express.json())
 UsersController(app)
 RecipesController(app)
 CommentsController(app)
-
-MoviesController(app)
+RecommendationsController(app)
 LikesController(app)
 SessionController(app)
 FollowsController(app)
