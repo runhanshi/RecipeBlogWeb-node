@@ -93,7 +93,18 @@ const UsersController = (app) => {
         }
 
     }
+    const getMyLikes = async (req, res) => {
+        if (req.session['currentUser']) {
+            const { _id } = req.session['currentUser'];
+            const likes = await userDao.findLikesByUserId(_id);
+            res.json(likes)
+        } else {
+            res.sendStatus(403)
+        }
 
+    }
+
+    app.get('/myLikes', getMyLikes)
     app.get('/myRecommends', getMyRecommends)
     app.get('/myRecipes', getMyRecipes)
     app.get('/users', findAllUsers)
