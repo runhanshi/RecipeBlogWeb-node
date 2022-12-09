@@ -3,6 +3,7 @@ import recipesModel from "../recipes/recipes-model.js";
 import recommendationsModel from "../recommendations/recommendations-model.js";
 import likesModel from "../likes/likes-model.js";
 import commentsModel from "../comments/comments-model.js";
+import followsModel from "../follows/follows-model.js";
 
 export const createUser = async (user) =>
     await usersModel.create(user)
@@ -44,4 +45,7 @@ export const updateUser = async (uid, userUpdates) =>
 export const findUserById = (uid) =>
     usersModel.findOne({_id:uid}, {password: false})
 
-
+export const findChefByCustomerId = async (id) =>
+    await followsModel.find({
+        follower: id
+    }).populate('followed', ['_id', 'username']);

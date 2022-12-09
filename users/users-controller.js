@@ -103,6 +103,18 @@ const UsersController = (app) => {
         }
 
     }
+    const getMyFollowedChef = async (req, res) => {
+        if (req.session['currentUser']) {
+            const { _id } = req.session['currentUser'];
+            const chefs = await userDao.findChefByCustomerId(_id);
+            res.json(chefs)
+        } else {
+            res.sendStatus(403)
+        }
+
+    }
+
+    app.get('/myFollowedChef', getMyFollowedChef)
 
     app.get('/myLikes', getMyLikes)
     app.get('/myRecommends', getMyRecommends)
