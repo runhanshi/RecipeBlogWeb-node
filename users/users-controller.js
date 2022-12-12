@@ -81,7 +81,12 @@ const UsersController = (app) => {
         } else {
             res.sendStatus(403)
         }
+    }
 
+    const getChefRecipes = async (req, res) => {
+        const uid = req.params.uid
+        const recipes = await userDao.findRecipesByUserId(uid);
+        res.json(recipes)
     }
     const getMyRecommends = async (req, res) => {
         if (req.session['currentUser']) {
@@ -119,6 +124,8 @@ const UsersController = (app) => {
     app.get('/myLikes', getMyLikes)
     app.get('/myRecommends', getMyRecommends)
     app.get('/myRecipes', getMyRecipes)
+
+    app.get('/chefRecipes/:uid', getChefRecipes)
     app.get('/users', findAllUsers)
     app.get('/users/:uid', findUserById)
     app.post('/users', createUser)
