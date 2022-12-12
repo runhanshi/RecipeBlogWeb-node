@@ -1,4 +1,5 @@
 import * as recipesDao from "./recipes-dao.js";
+import {findIfRecipeExists} from "./recipes-dao.js";
 
 const RecipesController = (app) => {
 
@@ -51,11 +52,24 @@ const RecipesController = (app) => {
         res.send(recipes)
     }
 
+    const findIfRecipeExists = async (req, res) => {
+        console.log("findIfRecipeExists controller")
+        const ext_rid = req.params['ExtRecipeID']
+        const existence = await recipesDao.findIfRecipeExists(ext_rid)
+        const result = {}
+        if (existence) {
+            result.existence = true
+        } else {
+            result.existence = false
+        }
+        res.send(result)
+    }
 
     app.post  ('/create-recipe', createRecipe)
     app.get   ('/recipes/:intRecipeID', findRecipeByID)
     app.get   ('/recipes-search', findIntRecipeBySearchKey)
     app.get   ('/recentCreation', findTenMostRecentlyCreatedRecipe)
+    app.get   ('/recipe-exist/:ExtRecipeID', findIfRecipeExists)
     app.put   ('/recipes/add-recommendation', addRecommendation)
     app.put   ('/recipes/remove-recommendation/:intRecipeID', removeRecommendation)
     app.delete('/recipes/:intRecipeID', deleteRecipe)

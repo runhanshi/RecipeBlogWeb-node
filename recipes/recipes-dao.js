@@ -49,3 +49,9 @@ export const findTenMostRecentlyCreatedRecipe = async () => {
         .exec();
     return recipes
 }
+
+export const findIfRecipeExists = async (ext_rid) => {
+    console.log(ext_rid)
+    const recipe = await recipesModel.findOne({extID: ext_rid})
+    return recipe
+}
