@@ -1,4 +1,7 @@
 import recipesModel from "./recipes-model.js";
+import likesModel from "../likes/likes-model.js";
+import commentsModel from "../comments/comments-model.js";
+import recommendationsModel from "../recommendations/recommendations-model.js";
 
 export const createRecipe = async (recipe) => {
     return await recipesModel.create(recipe)
@@ -21,7 +24,12 @@ export const removeRecommendation = async (rid) => {
 }
 
 export const deleteRecipe = async (rid) => {
-    return recipesModel.deleteOne({_id: rid});
+    const result = await likesModel.deleteMany({recipe: rid})
+            .then(await commentsModel.deleteMany({recipeID: rid}))
+            .then(await recommendationsModel.deleteMany({recipe: rid}))
+            .then(await recipesModel.deleteOne({_id: rid}));
+    console.log(result)
+    return result;
 }
 
 export const findRecipeByID = async (rid) => {
