@@ -4,7 +4,8 @@ export const gourmetRecommendsRecipe = async (gid, rid, time) => {
     return await recommendationsModel.create({gourmet: gid, recipe: rid, time: time})
 }
 export const gourmetUnrecommendsRecipe = async(gid, rid) => {
-    return await recommendationsModel.deleteOne({gourmet: gid, recipe: rid})
+    console.log("gourmetUnrecommendsRecipe!!!!!!")
+    return await recommendationsModel.deleteMany({gourmet: gid, recipe: rid})
 }
 
 export const findGourmetWhoRecommendsRecipe = async(rid) => {

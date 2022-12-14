@@ -12,7 +12,7 @@ const RecommendationsController = (app) => {
 
     const gourmetUnrecommendsRecipe = async (req, res) => {
         console.log("gourmetUnrecommendsRecipe controller")
-        const gid = req.params.cid
+        const gid = req.params.gid
         const rid = req.params.rid
         const unrecommendation = await recommendationDao.gourmetUnrecommendsRecipe(gid, rid)
         res.send(unrecommendation)
