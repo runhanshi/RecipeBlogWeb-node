@@ -23,7 +23,7 @@ export const findMostRecentTenLikedRecipes = async() => {
         { "$group": {
             "_id": "$recipe"
         }},
-        { "$limit": 10 },
+        { "$limit": 8 },
         {"$sort": {"time": -1}},
         {"$lookup": {
                 "from": "recipes",

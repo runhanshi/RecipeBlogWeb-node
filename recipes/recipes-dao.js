@@ -45,7 +45,7 @@ export const findIntRecipeBySearchKey = async (key) => {
 export const findTenMostRecentlyCreatedRecipe = async () => {
     const recipes = await recipesModel.find({}, ["_id", "name", "picture"])
         .sort({createTime: -1})
-        .limit(10)
+        .limit(8)
         .exec();
     return recipes
 }

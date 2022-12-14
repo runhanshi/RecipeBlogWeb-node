@@ -16,7 +16,7 @@ export const findGourmetWhoRecommendsRecipe = async(rid) => {
 export const findMostRecentTenRecommendedRecipes = async() => {
     return await recommendationsModel.find()
         .sort({time: -1})
-        .limit(10)
+        .limit(8)
         .populate('recipe', ['_id', 'name', 'picture'])
         .exec();
 }
